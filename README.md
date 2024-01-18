@@ -37,6 +37,12 @@ This has been tested with Python 3.11
     CMAKE_ARGS="-DLLAMA_METAL=on" pip install -U llama-cpp-python --no-cache-dir
     ```
 
+    - To use OpenAI ChatGPT, you need to set your API key in the environment by setting:
+
+    ```
+    export OPENAI_API_KEY="..."
+    ```
+
 ## Use the Notebook
 
 - Open Jupyter Lab
