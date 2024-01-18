@@ -1,0 +1,12 @@
+jupyterlab
+ipywidgets
+transformers
+sentence_transformers
+langchain[llms]
+pypdf 
+# pysqlite3
+unstructured
+chromadb
+gradio
+langchain-openai
+langchain-community
