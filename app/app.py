@@ -1,12 +1,10 @@
 import os
-import string
 import gradio as gr
 
 from langchain_community.document_loaders import WebBaseLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
-from langchain_community.llms import LlamaCpp
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 from langchain.schema.runnable import RunnablePassthrough
@@ -37,6 +35,15 @@ embedding=HuggingFaceEmbeddings(
     encode_kwargs=encode_kwargs
 )
 
+## Note:
+# temperature determines how reproducible the results will be: 0 should always get you the same answer for the same prompt, 
+# 1 will be much more random
+# top_n (number) or top_p (percent) determines how many of the top probable words are used in the pool of possible words. 
+# smaller top_X means less randomness and potential repetitive output.
+
+## To use local Llama model
+## localtion of the downloaded model:
+# from langchain_community.llms import LlamaCpp
 # model_file = '/Users/emmanuel/workspace/models/llms/llama-2-13b-chat.Q4_0.gguf'
 # # downloaded from https://huggingface.co/TheBloke/Llama-2-13B-chat-GGUF
 # # you may also try a smaller model:
@@ -45,12 +52,13 @@ embedding=HuggingFaceEmbeddings(
 #     model_path=model_file,
 #     n_ctx=4096, # context window
 #     #verbose=True,
-#     device='mps',
+#     device='mps', # this is specifically to use Mac M1/2 metal GPU 
 #     # model_kwargs={'device':'mps'},
 #     n_gpu_layers=1,
 #     temperature=0, 
 #     top_p=0.95
 # )
+
 
 ## to use OpenAI
 from langchain_openai import OpenAI
