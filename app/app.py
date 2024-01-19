@@ -75,8 +75,8 @@ def ingest(url):
 
     # split the text
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=100, 
-        chunk_overlap=10, 
+        chunk_size=5000, 
+        chunk_overlap=0, 
         length_function=len, 
     )
     all_splits = text_splitter.split_documents(data)
@@ -87,7 +87,7 @@ def ingest(url):
         # persist_directory="./"  # if you want to persist the DB locally, and not have to reindex each time
     )
     qa_chain = RetrievalQA.from_chain_type(llm,
-                                       retriever=vectorstore.as_retriever(search_kwargs={'k':10}),
+                                       retriever=vectorstore.as_retriever(search_kwargs={'k':3}),
                                        return_source_documents=True)
     rag_prompt = PromptTemplate.from_template(template)
     rag_chain = (
